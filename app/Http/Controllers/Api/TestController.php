@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTestRequest;
 use App\Models\Test;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
@@ -17,9 +18,12 @@ class TestController extends Controller
     public function index()
     {
         //
+        // $post = Test::create($request->all());
+        $posts = DB::table('tests')->paginate(15);
+
         return response()->json([
             'status' => true,
-            'posts' => []
+            'posts' => $posts
         ]);
     }
 
